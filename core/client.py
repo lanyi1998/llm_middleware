@@ -117,6 +117,7 @@ class LLMClient:
             stream=self.llm_ctx.stream,
             temperature=self.llm_ctx.temperature,
             extra_body=self.llm_ctx.__extra_body__,
+            top_p=self.llm_ctx.top_p,
         )
         if self.llm_ctx.stream:
             return StreamingResponse(

@@ -1,12 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Dict, Any
 
+
 @dataclass
 class LLMContext:
     model: str
     temperature: float
     messages: list
     stream: bool = False
+    top_p: float = 1.0
     __proxy__: str = ''
     __api_key__: str = ''
     __base_url__: str = ''
