@@ -9,6 +9,7 @@ class LLMContext:
     messages: list
     stream: bool = False
     top_p: float = 1.0
+    stream_options: Dict[str, Any] = field(default_factory=dict)
     __proxy__: str = ''
     __api_key__: str = ''
     __base_url__: str = ''
