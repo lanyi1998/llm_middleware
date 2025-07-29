@@ -2,9 +2,7 @@ import json
 
 import httpx
 from fastapi.responses import StreamingResponse
-from google import genai
 from openai import OpenAI
-import time
 from tools.context import LLMContext
 
 
@@ -170,6 +168,6 @@ class LLMClient:
             )
         return client
 
-    def create_gemini_client(self, cxt: LLMContext):
-        client = genai.Client()
-        return client
+    # def create_gemini_client(self, cxt: LLMContext):
+    #     client = genai.Client()
+    #     return client
