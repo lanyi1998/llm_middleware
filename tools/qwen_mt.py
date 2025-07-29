@@ -7,6 +7,7 @@ class QwenMt(Base):
         if ctx.model in ["qwen-mt-turbo", "qwen-mt-plus"]:
             ctx.__pseudo_stream__ = True
             ctx.stream = False
+            ctx.top_p = 0.0
             translation_options = {
                 "source_lang": config['tools']['QwenMt']['source_lang'],
                 "target_lang": config['tools']['QwenMt']['target_lang'],
