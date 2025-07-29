@@ -1,11 +1,11 @@
 # llm_middleware
-LLM中间件，在不修改LLM客户端的情况下，增强LLM
+LLM中间件，在不修改LLM客户端的情况下，增强LLM客户端
 
 # 使用
 
 `uv sync`
 
-`uvicorn main:app --reload`
+`uvicorn main:app`
 
 原先的base_url: 
 
@@ -22,4 +22,3 @@ LLM中间件，在不修改LLM客户端的情况下，增强LLM
 | LLMLogger | 打印请求                  |
 | Proxy     | 为指定模型设置代理        |
 | QwenMt    | 转换消息为qwen_mt模型格式 |
-
