@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from mcp.context import LLMContext
+from tools.context import LLMContext
 
 
 class Base(ABC):
