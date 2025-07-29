@@ -1,4 +1,9 @@
 tools:
+  Enable: [
+    "Logger",
+    "Proxy",
+    "QwenMt"
+  ]
   Proxy:
     proxy_model: 'gpt-3.5-turbo,gpt-4o'
     proxy_url: 'http://127.0.0.1:7890'

@@ -38,6 +38,8 @@ async def llm_middleware(request: Request, call_next):
     cxt = request_conversion(request, body_dict)
     direct_subclasses = tools.base.Base.__subclasses__()
     for cls in direct_subclasses:
+        if cls.__name__ not in config.config['tools']['Enable']:
+             continue
         c = cls().handle(config.config, cxt)
         if c:
             cxt = c

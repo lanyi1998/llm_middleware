@@ -3,9 +3,9 @@ from tools.context import LLMContext
 from dataclasses import fields
 
 
-class LLMLogger(Base):
+class Logger(Base):
     def handle(self, config: dict, context: LLMContext):
-        LLMLogger.looger(config, context)
+        Logger.looger(config, context)
 
     @staticmethod
     def looger(config: dict, context: LLMContext):
