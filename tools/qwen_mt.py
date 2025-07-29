@@ -8,17 +8,16 @@ class QwenMt(Base):
             ctx.__pseudo_stream__ = True
             ctx.stream = False
             translation_options = {
-                "source_lang": "auto",
-                "target_lang": "English"
+                "source_lang": config['tools']['QwenMt']['source_lang'],
+                "target_lang": config['tools']['QwenMt']['target_lang'],
             }
             ctx.messages = [
                 {
                     "role": "user",
-                    "content": ctx.messages[len(ctx.messages)-1]["content"]
+                    "content": ctx.messages[len(ctx.messages) - 1]["content"]
                 }
             ]
             ctx.__extra_body__ = {
                 "translation_options": translation_options
             }
-            # ctx.messages = messages
         return ctx

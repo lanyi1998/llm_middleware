@@ -2,3 +2,7 @@ tools:
   Proxy:
     proxy_model: 'gpt-3.5-turbo,gpt-4o'
     proxy_url: 'http://127.0.0.1:7890'
+  QwenMt:
+    # https://help.aliyun.com/zh/model-studio/machine-translation#14735a54e0rwb
+    source_lang: 'auto'
+    target_lang: 'zh'
