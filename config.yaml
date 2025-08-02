@@ -2,6 +2,7 @@ tools:
   Enable: [
     "Logger",
     "Proxy",
+    "FileLoader",
     "QwenMt"
   ]
   Proxy:
