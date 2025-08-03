@@ -15,9 +15,8 @@ def main():
     global ToolRegistry
     config.config = config.load_config("config.yaml")
     for _, name, _ in pkgutil.walk_packages(tools.__path__, tools.__name__ + '.'): 
-        importlib.import_module(name)
-        
-    ToolRegistry = {cls.__name__: cls for cls in tools.base.Base.__subclasses__()} #注册工具
+        importlib.import_module(name)   
+    ToolRegistry = {cls.__name__: cls for cls in tools.base.Base.__subclasses__()} 
 
 
 main()

@@ -5,7 +5,6 @@ import re
 
 class FileLoader(Base):
     def handle(self, config: dict, context: LLMContext):
-        
         if not context.messages:
             return context
 
@@ -14,30 +13,29 @@ class FileLoader(Base):
         if last_message.get('role') == 'user':
             content = last_message.get('content', '')
 
-            match = re.search(r'\[@([^\]]+)\]', content)
-            
-            if match:
-                file_path_str = match.group(1)
-                file_path_str = file_path_str.strip('"')
-                file_path = Path(file_path_str)
 
-                print(f"[{self.__class__.__name__}] File path found: {file_path}")
+            # 正則表達式 @(\S+) 會捕獲 @ 後面所有非空格的字符作為 keyword (group 1)
+            matches = list(re.finditer(r'@(\S+)', content))
+            for match in reversed(matches):
+                file_path_str = match.group(1)
+                cleaned_file_path_str = file_path_str.rstrip('.,;!?')
+                file_path = Path(cleaned_file_path_str)
 
                 try:
 
                     file_content = file_path.read_text(encoding='utf-8')
-  
-                    new_content = re.sub(r'\[@([^\]]+)\]', file_content, content, count=1)
+                    
 
-                    context.messages[-1]['content'] = new_content
+                    content = content[:match.start()] + file_content + content[match.end():]
                     
-                    print(f"[{self.__class__.__name__}] File content loaded and replaced successfully.")
-                    
+                    print(f"[{self.__class__.__name__}] Success: Loaded and replaced '{cleaned_file_path_str}'")
+
                 except FileNotFoundError:
-                    context.messages[-1]['content'] = "FileNotFoundError"
-                    print(f"[{self.__class__.__name__}] Error: File not found: {file_path_str}")
+                    print(f"[{self.__class__.__name__}] Skipped: File not found for '{cleaned_file_path_str}'")
+                    pass
                 except Exception as e:
-                    context.messages[-1]['content'] = "Failed to read file"
-                    print(f"[{self.__class__.__name__}] Error: Failed to read file: {e}")
-
+                    print(f"[{self.__class__.__name__}] Skipped: Error reading '{cleaned_file_path_str}': {e}")
+                    pass
+            context.messages[-1]['content'] = content
+                        
         return context
